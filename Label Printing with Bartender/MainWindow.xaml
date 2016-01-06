@@ -1,0 +1,52 @@
+﻿<Window x:Class="Label_Printing_with_Bartender.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="600" Width="1200" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid Background="#FF9E9E9E">
+        <Button x:Name="bAddFMT" Content="Add..." HorizontalAlignment="Left" Margin="99,13,0,0" VerticalAlignment="Top" Width="75" Click="bAddFMT_Click"/>
+        <DataGrid x:Name="gLabelsGrid" ItemsSource="{Binding}" DisplayMemberPath="FormatName" SelectedValuePath="FormatID" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="242" Width="250" AutoGenerateColumns="False" Foreground="Black" BorderBrush="#FF4E7FAE" BorderThickness="1" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" SelectionMode="Single" CanUserResizeColumns="False" CanUserResizeRows="False" SelectionChanged="gLabelsGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=FormatName}" ClipboardContentBinding="{x:Null}" Header="Format Name" CanUserResize="False" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Label formats:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top"/>
+        <Label Content="Named substring in selected format:" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="gNamedSubstrings" HorizontalAlignment="Left" Margin="10,318,0,0" VerticalAlignment="Top" Height="234" Width="250" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False" CanUserSortColumns="False" SelectionChanged="gNamedSubstrings_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=SubStringName}" Header="Name" CanUserResize="False" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="gDatabases" HorizontalAlignment="Left" Margin="265,40,0,0" VerticalAlignment="Top" Height="150" Width="320" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" SelectionChanged="gDatabases_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=DatabaseName}" ClipboardContentBinding="{x:Null}" Header="Database Name" CanUserResize="False" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="gLinks" HorizontalAlignment="Left" Margin="590,40,0,0" VerticalAlignment="Top" Height="485" Width="594" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" SelectionChanged="gLinks_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=BartenderSubString.SubStringName}" ClipboardContentBinding="{x:Null}" Header="SubString Name" CanUserResize="False" Width="*" Foreground="Red" />
+                <DataGridTextColumn Binding="{Binding Path=BartenderDatabase.DatabaseName}" ClipboardContentBinding="{x:Null}" Header="Database Name" CanUserResize="False" Width="*" Foreground="#FF002EFF"/>
+                <DataGridTextColumn Binding="{Binding Path=DatabaseTable.TableName}" ClipboardContentBinding="{x:Null}" Header="Table Name" CanUserResize="False" Width="*" Foreground="#FF002EFF"/>
+                <DataGridTextColumn Binding="{Binding Path=DatabaseColumn.ColumnName}" ClipboardContentBinding="{x:Null}" Header="Column Name" CanUserResize="False" Width="*" Foreground="#FF002EFF"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Databases attached to format:" HorizontalAlignment="Left" Margin="261,11,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="bAddDB" Content="Add..." HorizontalAlignment="Left" Margin="510,14,0,0" VerticalAlignment="Top" Width="75" Click="bAddDB_Click"/>
+        <DataGrid x:Name="gTables" HorizontalAlignment="Left" Margin="265,216,0,0" VerticalAlignment="Top" Height="150" Width="320" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionChanged="gTables_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=TableName}" ClipboardContentBinding="{x:Null}" Header="Tables" CanUserResize="False" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Tables in selected database:" HorizontalAlignment="Left" Margin="260,190,0,0" VerticalAlignment="Top"/>
+        <Label Content="Linked named substring to database column:" HorizontalAlignment="Left" Margin="590,10,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="gColumns" HorizontalAlignment="Left" Margin="265,402,0,0" VerticalAlignment="Top" Height="150" Width="320" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" SelectionChanged="gColumns_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=ColumnName}" ClipboardContentBinding="{x:Null}" Header="Columns" CanUserResize="False" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Columns in selected table:" HorizontalAlignment="Left" Margin="265,371,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="bRemoveDB" Content="Remove" HorizontalAlignment="Left" Margin="430,14,0,0" VerticalAlignment="Top" Width="75" Click="bRemoveDB_Click"/>
+        <Button x:Name="bRemoveFMT" Content="Remove" HorizontalAlignment="Left" Margin="181,13,0,0" VerticalAlignment="Top" Width="75" Click="bRemoveFMT_Click"/>
+        <Button x:Name="bAddLink" Content="Add Link" HorizontalAlignment="Left" Margin="590,530,0,0" VerticalAlignment="Top" Width="150" Click="bAddLink_Click"/>
+        <Button x:Name="bRemoveLink" Content="Remove Link" HorizontalAlignment="Left" Margin="748,530,0,0" VerticalAlignment="Top" Width="150" Click="bRemoveLink_Click"/>
+    </Grid>
+</Window>
