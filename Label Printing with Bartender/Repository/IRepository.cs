@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Label_Printing_with_Bartender.Service
+namespace Label_Printing_with_Bartender.Repository
 {
     public interface IRepository
     {
@@ -11,7 +11,7 @@ namespace Label_Printing_with_Bartender.Service
         void Update<T>(T entity) where T : class;
 
         IQueryable<T> Get<T>() where T : class;
-        
+
         int Save();
     }
 }

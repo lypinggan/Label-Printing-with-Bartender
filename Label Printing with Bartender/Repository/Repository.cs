@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 
-namespace Label_Printing_with_Bartender.Service
+namespace Label_Printing_with_Bartender.Repository
 {
     public sealed class Repository : IRepository, IDisposable
     {
