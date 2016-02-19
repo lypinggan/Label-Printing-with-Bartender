@@ -89,7 +89,7 @@ namespace Label_Printing_with_Bartender.Windows
         {
             if (selectedformat != null)
             {
-                openformat = services.openBartenderFormat(selectedformat.FormatPath);
+                openformat = services.openBartenderFormat(selectedformat.FormatPath, services.runBartenderEngine());
                 if (cboPrinters.SelectedItem != null)
                     openformat.PrintSetup.PrinterName = cboPrinters.SelectedItem.ToString();
                 Result result = openformat.Print();
