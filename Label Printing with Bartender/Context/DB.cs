@@ -5,7 +5,8 @@ namespace Label_Printing_with_Bartender.Context
 {
     public class DB : DbContext
     {
-        public DB()
+        public DB(string connectionStringName)
+            : base (connectionStringName)
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<DB>());
             Configuration.ProxyCreationEnabled = false;

@@ -16,17 +16,13 @@ namespace Label_Printing_with_Bartender.Windows
     public partial class StartWindow : System.Windows.Window, IDisposable
     {
         private const string appName = "Label Printing with Bartender";
-        LabelFormatDocument openformat = null; // The currently open Format
-
-        //selected objects
-        BartenderFormat selectedformat;
 
         //DB
-        DB db = new DB();
+        DB db = new DB("LPWB_Database");
 
         //Services
-        private IRepository repository;
-        private IServices services;
+        public IRepository repository;
+        public IServices services;
 
         public StartWindow()
         {
@@ -49,6 +45,7 @@ namespace Label_Printing_with_Bartender.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            updateFormatGrid();
             Printers printers = new Printers();
             foreach (Printer printer in printers)
             {
@@ -59,25 +56,18 @@ namespace Label_Printing_with_Bartender.Windows
             {
                 cboPrinters.SelectedItem = printers.Default.PrinterName;
             }
-            updateFormatGrid();
         }
 
         private void bFormatSetup_Click(object sender, RoutedEventArgs e)
         {
-            FormatSetupWindow dssw = new FormatSetupWindow(repository);
+            FormatSetupWindow dssw = new FormatSetupWindow(repository, services);
             WindowState = WindowState.Minimized;
             bool? result = dssw.ShowDialog();
             if (result == false)
             {
                 WindowState = WindowState.Normal;
-                updateFormatGrid();
             }
-        }
-
-        private void gLabelsGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            selectedformat = (BartenderFormat)gLabelsGrid.SelectedItem;
-            selectedformat = repository.Get<BartenderFormat>().Where(w => w.Id == selectedformat.Id).First();
+            updateFormatGrid();
         }
 
         private void updateFormatGrid()
@@ -87,23 +77,14 @@ namespace Label_Printing_with_Bartender.Windows
 
         private void bPrint_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedformat != null)
+            if (gLabelsGrid.SelectedIndex >= 0)
             {
-                openformat = services.openBartenderFormat(selectedformat.FormatPath, services.runBartenderEngine());
-                if (cboPrinters.SelectedItem != null)
-                    openformat.PrintSetup.PrinterName = cboPrinters.SelectedItem.ToString();
-                Result result = openformat.Print();
-                switch (result)
+                PrintWindow pw = new PrintWindow(repository, services, (BartenderFormat)gLabelsGrid.SelectedItem, cboPrinters.SelectedItem.ToString());
+                WindowState = WindowState.Minimized;
+                bool? result = pw.ShowDialog();
+                if (result == false)
                 {
-                    case Result.Success:
-                        services.showMessageBox("Print sucessfull");
-                        break;
-                    case Result.Timeout:
-                        services.showMessageBox("Print timed out, please check Bartender runs manually and try again.");
-                        break;
-                    case Result.Failure:
-                        services.showMessageBox("Print failed, this could be due to licence server issues.");
-                        break;
+                    WindowState = WindowState.Normal;
                 }
             }
             else

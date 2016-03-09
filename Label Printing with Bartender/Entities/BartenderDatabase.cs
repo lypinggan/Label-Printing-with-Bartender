@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Label_Printing_with_Bartender.Entities
 {
@@ -50,7 +48,7 @@ namespace Label_Printing_with_Bartender.Entities
         /// </summary>
         public ICollection<DatabaseColumn> DatabaseColumns { get; set; }
     }
-    
+
     public class DatabaseColumn
     {
         /// <summary>

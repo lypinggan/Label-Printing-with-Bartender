@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Seagull.BarTender.Print;
 using Label_Printing_with_Bartender.Repository;
-using Label_Printing_with_Bartender.Context;
 using Label_Printing_with_Bartender.Entities;
 
 namespace Label_Printing_with_Bartender.Services

@@ -22,5 +22,16 @@ namespace Label_Printing_with_Bartender.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=LPWB_Database;Integrated Secur" +
+            "ity=True")]
+        public string LPWB_DatabaseConnectionString {
+            get {
+                return ((string)(this["LPWB_DatabaseConnectionString"]));
+            }
+        }
     }
 }

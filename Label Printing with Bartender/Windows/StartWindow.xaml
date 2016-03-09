@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:Label_Printing_with_Bartender.Windows"
         xmlns:Entities="clr-namespace:Label_Printing_with_Bartender.Entities" xmlns:Context="clr-namespace:Label_Printing_with_Bartender.Context" x:Class="Label_Printing_with_Bartender.Windows.StartWindow"
         mc:Ignorable="d"
-        Title="Label Printing with Bartender" Height="330" Width="460" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Label Printing with Bartender" Height="330" Width="277.188" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid Background="#FF9E9E9E">
         <Button x:Name="bFormatSetup" Content="Format Data Source Setup..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="152" Click="bFormatSetup_Click"/>
         <Button x:Name="bPrint" Content="Print Format" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="90" Click="bPrint_Click"/>
-        <ComboBox x:Name="cboPrinters" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" Width="180"/>
-        <DataGrid x:Name="gLabelsGrid" ItemsSource="{Binding}" DisplayMemberPath="FormatName" SelectedValuePath="FormatID" HorizontalAlignment="Stretch" Margin="10,40,10,10" VerticalAlignment="Top" Height="242" AutoGenerateColumns="False" Foreground="Black" BorderBrush="#FF4E7FAE" BorderThickness="1" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" SelectionMode="Single" CanUserResizeColumns="False" CanUserResizeRows="False" SelectionChanged="gLabelsGrid_SelectionChanged">
+        <DataGrid x:Name="gLabelsGrid" DisplayMemberPath="FormatName" SelectedValuePath="FormatID" HorizontalAlignment="Stretch" Margin="10,40,10,10" VerticalAlignment="Top" Height="242" AutoGenerateColumns="False" Foreground="Black" BorderBrush="#FF4E7FAE" BorderThickness="1" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" SelectionMode="Single" CanUserResizeColumns="False" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding FormatName}" ClipboardContentBinding="{x:Null}" Header="Format Name" CanUserResize="False" Width="*"/>
             </DataGrid.Columns>

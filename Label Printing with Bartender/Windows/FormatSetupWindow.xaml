@@ -11,7 +11,7 @@
         </DataGrid>
         <Label Content="Label formats:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top"/>
         <Label Content="Named substring in selected format:" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="gNamedSubstrings" HorizontalAlignment="Left" Margin="10,318,0,0" VerticalAlignment="Top" Height="234" Width="250" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False" CanUserSortColumns="False" SelectionChanged="gNamedSubstrings_SelectionChanged">
+        <DataGrid x:Name="gNamedSubstrings" HorizontalAlignment="Left" Margin="10,318,0,0" VerticalAlignment="Top" Height="234" Width="250" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False" CanUserSortColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=SubStringName}" Header="Name" CanUserResize="False" Width="*"/>
             </DataGrid.Columns>
@@ -21,7 +21,7 @@
                 <DataGridTextColumn Binding="{Binding Path=DatabaseName}" ClipboardContentBinding="{x:Null}" Header="Database Name" CanUserResize="False" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="gLinks" HorizontalAlignment="Left" Margin="590,40,0,0" VerticalAlignment="Top" Height="485" Width="594" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" SelectionChanged="gLinks_SelectionChanged">
+        <DataGrid x:Name="gLinks" HorizontalAlignment="Left" Margin="590,40,0,0" VerticalAlignment="Top" Height="485" Width="594" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=BartenderSubString.SubStringName}" ClipboardContentBinding="{x:Null}" Header="SubString Name" CanUserResize="False" Width="*" Foreground="Red" />
                 <DataGridTextColumn Binding="{Binding Path=BartenderDatabase.DatabaseName}" ClipboardContentBinding="{x:Null}" Header="Database Name" CanUserResize="False" Width="*" Foreground="#FF002EFF"/>
@@ -38,7 +38,7 @@
         </DataGrid>
         <Label Content="Tables in selected database:" HorizontalAlignment="Left" Margin="260,190,0,0" VerticalAlignment="Top"/>
         <Label Content="Linked named substring to database column:" HorizontalAlignment="Left" Margin="590,10,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="gColumns" HorizontalAlignment="Left" Margin="265,402,0,0" VerticalAlignment="Top" Height="150" Width="320" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" SelectionChanged="gColumns_SelectionChanged">
+        <DataGrid x:Name="gColumns" HorizontalAlignment="Left" Margin="265,402,0,0" VerticalAlignment="Top" Height="150" Width="320" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=ColumnName}" ClipboardContentBinding="{x:Null}" Header="Columns" CanUserResize="False" Width="*"/>
             </DataGrid.Columns>

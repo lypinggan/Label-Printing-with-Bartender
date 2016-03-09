@@ -1,0 +1,25 @@
+﻿<Window x:Class="Label_Printing_with_Bartender.Windows.PrintWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Label_Printing_with_Bartender.Windows"
+        mc:Ignorable="d"
+        Title="PrintWindow" Height="600" Width="1200">
+    <Grid Background="#FF9E9E9E">
+        <Label x:Name="lFormatName" Content="Format Name: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lFormat" Content="FormatName" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="bPrint" Content="Print" HorizontalAlignment="Left" Margin="365,39,0,0" VerticalAlignment="Top" Width="75" IsDefault="True" Click="bPrint_Click"/>
+        <DataGrid x:Name="gLinks" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Height="494" Width="430" SelectionMode="Single" HorizontalGridLinesBrush="#FFC5C5C5" VerticalGridLinesBrush="#FFC5C5C5" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding BartenderSubString.SubStringName}" ClipboardContentBinding="{x:Null}" Header="SubString Name" CanUserResize="False" Width="*" Foreground="Red" />
+                <DataGridTextColumn Binding="{Binding BartenderDatabase.DatabaseName}" ClipboardContentBinding="{x:Null}" Header="Database Name" CanUserResize="False" Width="*" Foreground="#FF002EFF"/>
+                <DataGridTextColumn Binding="{Binding DatabaseTable.TableName}" ClipboardContentBinding="{x:Null}" Header="Table Name" CanUserResize="False" Width="*" Foreground="#FF002EFF"/>
+                <DataGridTextColumn Binding="{Binding DatabaseColumn.ColumnName}" ClipboardContentBinding="{x:Null}" Header="Column Name" CanUserResize="False" Width="*" Foreground="#FF002EFF"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ComboBox x:Name="cboPrinters" HorizontalAlignment="Left" Margin="90,39,0,0" VerticalAlignment="Top" Width="270"/>
+        <Label x:Name="label" Content="Printer:" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="445,66,0,0" VerticalAlignment="Top" Height="170" Width="737"/>
+    </Grid>
+</Window>

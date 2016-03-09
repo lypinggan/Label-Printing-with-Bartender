@@ -15,11 +15,6 @@ namespace Label_Printing_with_Bartender
         #region Fields
         //selected objects
         private BartenderFormat selectedformat { get; set; }
-        private BartenderSubString selectedsubstring { get; set; }
-        private BartenderDatabase selecteddatabase { get; set; }
-        private DatabaseTable selectedtable { get; set; }
-        private DatabaseColumn selectedcolumn { get; set; }
-        private Links selectedlink { get; set; }
 
         //Interfaces.
         /// <summary>
@@ -35,11 +30,11 @@ namespace Label_Printing_with_Bartender
         #endregion
 
         #region Constructor
-        public FormatSetupWindow(IRepository repositoryin)
+        public FormatSetupWindow(IRepository repositoryin, IServices servicesin)
         {
             InitializeComponent();
             repository = repositoryin;
-            services = new Services.Services();
+            services = servicesin;
         }
         #endregion
 
@@ -90,10 +85,11 @@ namespace Label_Printing_with_Bartender
 
         private void bRemoveDB_Click(object sender, RoutedEventArgs e)
         {
-            if (selecteddatabase != null)
+            BartenderDatabase tempdatabase;
+            if (gDatabases.SelectedIndex >= 0)
             {
-                services.deleteDB(repository, selecteddatabase.Id);
-                selecteddatabase = null;
+                tempdatabase = (BartenderDatabase)gDatabases.SelectedItem;
+                services.deleteDB(repository, tempdatabase.Id);
                 updateDatabaseGrid();
             }
             else
@@ -104,11 +100,19 @@ namespace Label_Printing_with_Bartender
 
         private void bAddLink_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedsubstring != null)
+            BartenderSubString tempsubstring;
+            BartenderDatabase tempdatabase;
+            DatabaseTable temptable;
+            DatabaseColumn tempcolumn;
+            if (gNamedSubstrings.SelectedIndex >= 0)
             {
-                if (selectedcolumn != null)
+                tempsubstring = (BartenderSubString)gNamedSubstrings.SelectedItem;
+                if (gColumns.SelectedIndex >= 0)
                 {
-                    services.addLink(repository, selectedformat, selectedsubstring, selecteddatabase, selectedtable, selectedcolumn);
+                    tempdatabase = (BartenderDatabase)gDatabases.SelectedItem;
+                    temptable = (DatabaseTable)gTables.SelectedItem;
+                    tempcolumn = (DatabaseColumn)gColumns.SelectedItem;
+                    services.addLink(repository, selectedformat, tempsubstring, tempdatabase, temptable, tempcolumn);
                     updateLinks();
                 }
                 else
@@ -124,10 +128,10 @@ namespace Label_Printing_with_Bartender
 
         private void bRemoveLink_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedlink != null)
+            if (gLinks.SelectedIndex >= 0)
             {
-                services.deleteLink(repository, selectedlink.Id);
-                selectedlink = null;
+                Links templink = (Links)gLinks.SelectedItem;
+                services.deleteLink(repository, templink.Id);
                 updateLinks();
                 gLinks.SelectedIndex = 0;
             }
@@ -165,15 +169,9 @@ namespace Label_Printing_with_Bartender
             }
         }
 
-        private void gNamedSubstrings_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectedsubstring = (BartenderSubString)gNamedSubstrings.SelectedItem;
-        }
-
         private void gDatabases_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selecteddatabase = (BartenderDatabase)gDatabases.SelectedItem;
-            if (selecteddatabase != null)
+            if (gDatabases.SelectedIndex >= 0)
             {
                 updateTableGrid();
             }
@@ -181,18 +179,7 @@ namespace Label_Printing_with_Bartender
 
         private void gTables_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedtable = (DatabaseTable)gTables.SelectedItem;
             updateColumnGrid();
-        }
-
-        private void gColumns_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectedcolumn = (DatabaseColumn)gColumns.SelectedItem;
-        }
-
-        private void gLinks_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectedlink = (Links)gLinks.SelectedItem;
         }
 
         #endregion
@@ -233,9 +220,11 @@ namespace Label_Printing_with_Bartender
 
         private void updateTableGrid()
         {
-            if (selecteddatabase != null)
+            BartenderDatabase tempdatabase;
+            if (gDatabases.SelectedIndex >= 0)
             {
-                gTables.ItemsSource = repository.Get<BartenderDatabase>().Where(w => w.Id == selecteddatabase.Id).SelectMany(s => s.DatabaseTables).ToList();
+                tempdatabase = (BartenderDatabase)gDatabases.SelectedItem;
+                gTables.ItemsSource = repository.Get<BartenderDatabase>().Where(w => w.Id == tempdatabase.Id).SelectMany(s => s.DatabaseTables).ToList();
                 updateColumnGrid();
             }
             else
@@ -246,9 +235,11 @@ namespace Label_Printing_with_Bartender
 
         private void updateColumnGrid()
         {
-            if (selectedtable != null)
+            DatabaseTable temptable;
+            if (gTables.SelectedIndex >= 0)
             {
-                gColumns.ItemsSource = repository.Get<DatabaseTable>().Where(w => w.Id == selectedtable.Id).SelectMany(s => s.DatabaseColumns).ToList();
+                temptable = (DatabaseTable)gTables.SelectedItem;
+                gColumns.ItemsSource = repository.Get<DatabaseTable>().Where(w => w.Id == temptable.Id).SelectMany(s => s.DatabaseColumns).ToList();
             }
             else
             {
